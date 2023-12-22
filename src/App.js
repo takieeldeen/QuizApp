@@ -560,7 +560,7 @@ export default function App() {
               <span className="block font-bold mb-8 pt-2">You scored...</span>
             </h1>
           </div>
-          <div className="flex flex-col gap-4 relative z-20 w-full">
+          <div className="flex flex-col gap-4 relative z-20 ">
             <ResultBox>
               <div className="flex items-center gap-4 text-white">
                 <Icon>
