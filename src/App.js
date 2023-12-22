@@ -3,6 +3,7 @@
 ///////////////////////////////////////////////////////////
 import "./App.css";
 import { useState } from "react";
+import Switch from "./Switch";
 const data = {
   quizzes: [
     {
@@ -376,6 +377,7 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [screen, setScreen] = useState("greetings");
   const [selected, setselected] = useState("");
+  const [light, setLight] = useState(false);
   const questionsArr = data.quizzes.filter(
     (quiz) => quiz.title === (subject ? subject : "HTML")
   )[0].questions;
@@ -410,12 +412,44 @@ export default function App() {
     setselected("");
   };
 
-  // console.log(``);
   return (
-    <main className="main-container">
+    <main className={`main-container relative w-full ${light ? "light" : ""}`}>
       {/*//////////////////////////////////////////////////////////// Introduction Screen ////////////////////////*/}
       {screen === "greetings" && (
         <>
+          <header className="flex justify-between z-20 absolute top-10 w-[85%] h-10">
+            <div className="flex items-start gap-2 items-center ">
+              {subject && (
+                <>
+                  <Icon>
+                    <svg className="w-10 h-10  rounded-xl bg-white">
+                      <use
+                        xlinkHref={`./img${
+                          data.quizzes[
+                            data.quizzes.findIndex(
+                              (q) => q.title === (subject ? subject : "HTML")
+                            )
+                          ].icon
+                        }#${data.quizzes[
+                          data.quizzes.findIndex((q) => q.title === subject)
+                        ].title.toLowerCase()}`}
+                      ></use>
+                    </svg>
+                  </Icon>
+                  <span className="text-white font-semibold">{subject}</span>
+                </>
+              )}
+            </div>
+            <div className="flex gap-2">
+              <svg className="w-5">
+                <use xlinkHref={`./img/icon-moon-dark.svg#moonDark`}></use>
+              </svg>
+              <Switch width={3} onSwitch={setLight} />
+              <svg className="w-7">
+                <use xlinkHref={`./img/icon-sun-dark.svg#sunDark`}></use>
+              </svg>
+            </div>
+          </header>
           <div className=" relative self-start mt-12 z-20 w-full">
             <h1 className="heading text-white text-6xl font-light">
               Welcome to the{" "}
@@ -451,7 +485,40 @@ export default function App() {
       {/*//////////////////////////////////////////////////////////// Quiz Screen ////////////////////////*/}
       {screen === "quiz" && (
         <>
-          <div className=" relative self-start mt-12 ">
+          <header className="flex justify-between z-20 absolute top-10 w-[85%] h-10">
+            <div className="flex items-start gap-2 items-center ">
+              {subject && (
+                <>
+                  <Icon>
+                    <svg className="w-10 h-10  rounded-xl bg-white">
+                      <use
+                        xlinkHref={`./img${
+                          data.quizzes[
+                            data.quizzes.findIndex(
+                              (q) => q.title === (subject ? subject : "HTML")
+                            )
+                          ].icon
+                        }#${data.quizzes[
+                          data.quizzes.findIndex((q) => q.title === subject)
+                        ].title.toLowerCase()}`}
+                      ></use>
+                    </svg>
+                  </Icon>
+                  <span className="text-white font-semibold">{subject}</span>
+                </>
+              )}
+            </div>
+            <div className="flex gap-2">
+              <svg className="w-5">
+                <use xlinkHref={`./img/icon-moon-dark.svg#moonDark`}></use>
+              </svg>
+              <Switch width={3} onSwitch={setLight} />
+              <svg className="w-7">
+                <use xlinkHref={`./img/icon-sun-dark.svg#sunDark`}></use>
+              </svg>
+            </div>
+          </header>
+          <div className=" relative self-start mt-12 h-full">
             <p className="italic text-[#bebebe] mb-4">{`Question ${
               current + 1
             } of ${questionsArr.length}`}</p>
@@ -545,10 +612,10 @@ function Icon({ children }) {
 
 function Statusbar({ current, questionsLength }) {
   return (
-    <div className="w-2/4 h-2 bg-white rounded-2xl mt-24 bg-[#2c3949] overflow-hidden">
+    <div className=" w-full h-2 bg-white rounded-2xl mt-24 bg-[#2c3949] overflow-hidden">
       <div
         style={{ width: `${((current + 1) / questionsLength) * 100}%` }}
-        className={` h-2 bg-purple-800 rounded-2xl`}
+        className={` h-2 bg-purple-800 rounded-xl`}
       ></div>
     </div>
   );

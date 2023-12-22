@@ -22,6 +22,10 @@ main::before {
   left: 0;
 }
 
+.light::before {
+  border: 7rem solid #bdc3c7;
+}
+
 main::after {
   content: "";
   display: block;
@@ -36,9 +40,17 @@ main::after {
   bottom: 0;
 }
 
+.light::after {
+  border: 7rem solid #bdc3c7;
+}
+
 main::after {
   right: 0;
   bottom: 0;
+}
+
+.light.main-container {
+  @apply bg-[#ecf0f1] text-black;
 }
 
 .main-container {
@@ -48,16 +60,49 @@ main::after {
 .QuestionBox {
   @apply flex gap-4 items-center px-3 py-3 rounded-2xl w-96 cursor-pointer hover:translate-x-2 transition-all duration-300 bg-[#3c4c67];
 }
+
+.light header span {
+  @apply text-[#2c3e50];
+}
+
+.light .QuestionBox {
+  @apply bg-[#dfe6e9] text-black shadow-md;
+}
+
 .QuestionBox--selected {
-  @apply translate-x-2 cursor-default;
+  @apply translate-x-2 cursor-default border border-2;
+}
+
+.light .QuestionBox--selected {
+  @apply border border-purple-500 border-2;
+}
+
+.light .QuestionBox span {
+  @apply text-[#303d50];
 }
 
 .question {
   @apply text-white font-bold text-3xl w-[26rem];
 }
 
+.light .question {
+  @apply text-[#303d50];
+}
+
 .submitBox {
   @apply px-3 py-3 rounded-2xl w-96 cursor-pointer  transition-all duration-300 bg-purple-800 text-white text-center hover:bg-purple-700;
+}
+
+.light h1 {
+  @apply text-[#303d50];
+}
+
+main.light p {
+  @apply text-[#2c3e50];
+}
+
+.light svg {
+  @apply bg-transparent;
 }
 
 @media (max-width: 1000px) {
@@ -66,7 +111,8 @@ main::after {
     align-items: flex-start;
     justify-content: center;
     gap: 2rem;
-    padding: 6rem 4rem;
+    padding: 6rem 4rem 6rem 4rem;
+    height: auto;
   }
 
   .QuestionBox {
